@@ -4,7 +4,7 @@ import "core:fmt"
 import "core:os"
 
  generateAsm :: proc(tree: Expr) {
-    assembly := fmt.tprintf(".intel_syntax noprefix\n.global _start\n_start:\n%v\nmov rbx, rax\nmov rax, 60\nxor rdi, rdi\nsyscall", generateExprAsm(tree))
+    assembly := fmt.tprintf(".intel_syntax noprefix\n.global _start\n_start:\n%v\nmov rdi, rax\nmov rax, 60\nsyscall\n", generateExprAsm(tree))
     fmt.println(assembly)
     os.write_entire_file("output.asm", transmute([]u8)assembly)
 }
