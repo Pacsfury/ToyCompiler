@@ -9,7 +9,7 @@ ToyCompiler is just a simple compiler in order to learn basic Odin. It's not int
 
 ## What can it do right now?
 
-ToyCompiler can parse and generate assembly for addition and subtraction
+ToyCompiler can parse and generate assembly for addition and subtraction and write "string".
 
 ## Examples
 
