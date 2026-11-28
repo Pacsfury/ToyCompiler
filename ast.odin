@@ -1,7 +1,11 @@
 package main
 
 Expr :: union {
-    Token, ^iBinOp,
+    Token, ^iBinOp, ^WriteString,
+}
+
+WriteString :: struct {
+    value: string,
 }
 
 iBinOp :: struct {
@@ -11,6 +15,12 @@ iBinOp :: struct {
 }
 
 generateAst :: proc(input: [dynamic]Token) -> Expr {
+    if len(input) >= 3 && input[0].type == .write && input[1].type == .string && input[2].type == .eof {
+        node := new(WriteString, context.temp_allocator)
+        node^ = WriteString{value = input[1].value}
+        return node
+    }
+
     if len(input) < 2 || input[0].type == tokens.eof {
         empty: Expr = Token{type = .eof}
         return empty
